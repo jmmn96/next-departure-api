@@ -1,6 +1,7 @@
 from next_departures_api.models import Departure
 from next_departures_api.tfl_client import TflClient
 
+
 class FakeTflClient(TflClient):
     def __init__(self, responses: dict[str, list[Departure] | Exception]) -> None:
         # stop ID -> what to "return": a list of departures, or an exception to raise

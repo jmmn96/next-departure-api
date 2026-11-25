@@ -1,7 +1,9 @@
 from fastapi.testclient import TestClient
+
 from next_departures_api.main import app
 
 test_client = TestClient(app)
+
 
 def test_health():
     response = test_client.get("/health")
