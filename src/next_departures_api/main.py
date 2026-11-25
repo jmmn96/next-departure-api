@@ -2,8 +2,8 @@ import logging
 
 from fastapi import FastAPI
 
-from .config import settings
-from .tfl_client import *
+from next_departures_api.config import settings
+from next_departures_api.tfl_client import *
 
 logging.basicConfig(
      format="{asctime} - {levelname} - {message}",
@@ -28,10 +28,15 @@ def health_check():
 async def tfl_url(url: str | None = None):
     return url
 
-@app.get("/departures")
-async def get_departures():
-    tfl_client = TflClient(env_settings.api_key, 10)
-    return await tfl_client.get_departures('910GBLCHSRD')
+# @app.get("/departures/{station_name}")
+# async def get_departures(station_name):
+#     tfl_client = TflClient(env_settings.api_key, 10)
+#     station_list = await tfl_client.get_station_ids(station_name)
+#     departures = []
+#     for station in station_list:
+#          departures.append(await tfl_client.get_departures(station.id))
+
+#     return departures
 
 
 
