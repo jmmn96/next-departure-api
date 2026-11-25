@@ -1,11 +1,10 @@
-from fastapi import FastAPI, Depends
-from enum import StrEnum
-from pydantic import BaseModel, Field
-import httpx
-from typing import Annotated
+import logging
+
+from fastapi import FastAPI
+
 from .config import settings
 from .tfl_client import *
-import logging
+
 logging.basicConfig(
      format="{asctime} - {levelname} - {message}",
      style="{",

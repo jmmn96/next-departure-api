@@ -11,6 +11,9 @@ dependencies = [
     "fastapi[standard]>=0.124.4",
     "httpx>=0.28.1",
     "pydantic-settings>=2.16.3",
+    "pytest>=9.2.0",
+    "pytest-asyncio>=1.5.0",
+    "ruff>=0.17.6",
     "uvicorn>=0.33.0",
 ]
 
@@ -29,3 +32,6 @@ dev = [
 
 [tool.fastapi]
 entrypoint = "src.next_departures_api.main:app"
+
+[tool.ruff.lint]
+extend-select = ["N", "I", "B"]
