@@ -27,7 +27,7 @@ async def build_board(
     failures: int = 0
     board: Board = Board()
 
-    for mode_name, response in zip(selected_departures.keys(), results):
+    for mode_name, response in zip(selected_departures.keys(), results, strict=False):
         if isinstance(response, TfLError):
             failures += 1
             board.warnings.append(f"Failed to gather departures for {mode_name} mode")

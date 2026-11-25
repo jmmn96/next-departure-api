@@ -1,0 +1,31 @@
+name: Check python format and run pytest
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+jobs:
+  Test-python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v7
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.4.0
+      - name: Sync uv
+        run: uv sync --locked
+      - name: Linting with ruff
+        run: |
+          uv run ruff check
+          uv run ruff format --check
+      - name: Test with pytest
+        run: uv run pytest
