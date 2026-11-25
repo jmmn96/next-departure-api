@@ -3,7 +3,7 @@ from next_departures_api.models import Departure, Board, ModeName
 from asyncio import gather
 
 
-async def get_departures(tfl_client: TflClient, stop_ids: dict[ModeName, str], within_minutes: int, mode: ModeName | None = None) -> Board:
+async def build_board(tfl_client: TflClient, stop_ids: dict[ModeName, str], within_minutes: int, mode: ModeName | None = None) -> Board:
     selected_departures = {mode_name: tfl_client.get_departures(station_id) for mode_name ,station_id in stop_ids.items() if mode_name == mode or mode is None}
     if not selected_departures:
         raise KeyError(f'No station is available for selected mode: {mode}')
